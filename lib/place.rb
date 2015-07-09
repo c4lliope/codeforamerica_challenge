@@ -31,5 +31,16 @@ class Place
     housing_units / land_area
   end
 
+  def to_s
+<<-STRING
+#{name}
+\tPopulation: #{population.to_i}
+\tHousing Units: #{housing_units.to_i}
+\tLand Area: #{land_area}
+\tPopulation Density: #{population_density}
+\tHousing Density: #{housing_density}
+STRING
+  end
+
   attr_reader :name, :land_area, :population, :housing_units
 end
