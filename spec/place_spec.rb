@@ -8,21 +8,26 @@ RSpec.describe Place do
 
       place = Place.parse(data)
 
-      expect(place.summary_level).to eq("080")
-      expect(place.geographic_component).to eq("00")
-      expect(place.state_fips).to eq("06")
-      expect(place.place_fips).to eq("00562")
-      expect(place.county_fips).to eq("001")
-      expect(place.tract).to eq("427100")
-      expect(place.zip).to eq("")
-      expect(place.block).to eq("")
       expect(place.name).to eq("Census Tract 4271")
-      expect(place.latitude).to eq("37.764728")
-      expect(place.longitude).to eq("-122.230790")
       expect(place.land_area).to eq("982120")
-      expect(place.water_area).to eq("192938")
       expect(place.population).to eq("3497")
       expect(place.housing_units).to eq("1450")
+    end
+  end
+
+  describe "#population_density" do
+    it "divides population by land area" do
+      place = Place.new(population: 20, land_area: 10)
+
+      expect(place.population_density).to eq(2)
+    end
+  end
+
+  describe "#housing_density" do
+    it "divides housing units by land area" do
+      place = Place.new(housing_units: 20, land_area: 10)
+
+      expect(place.housing_density).to eq(2)
     end
   end
 end
