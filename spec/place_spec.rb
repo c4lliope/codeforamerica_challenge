@@ -9,9 +9,20 @@ RSpec.describe Place do
       place = Place.parse(data)
 
       expect(place.name).to eq("Census Tract 4271")
-      expect(place.land_area).to eq("982120")
-      expect(place.population).to eq("3497")
-      expect(place.housing_units).to eq("1450")
+      expect(place.land_area).to eq(982120)
+      expect(place.population).to eq(3497)
+      expect(place.housing_units).to eq(1450)
+    end
+  end
+
+  describe ".parse_records" do
+    it "parses many records" do
+      data = File.read("./spec/fixtures/sample_data.txt")
+      places = Place.parse_records(data)
+
+      expect(places.count).to eq(2)
+      expect(places.first.housing_units).to eq(1450)
+      expect(places.last.housing_units).to eq(1725)
     end
   end
 

@@ -1,12 +1,18 @@
 class Place
+  def self.parse_records(data)
+    rows = data.split("\n")
+    rows.shift
+    rows.map { |row| parse(row) }
+  end
+
   def self.parse(line)
     data = line.split("\t")
 
     self.new(
       name: data[8],
-      land_area: data[11],
-      population: data[13],
-      housing_units: data[14],
+      land_area: data[11].to_f,
+      population: data[13].to_f,
+      housing_units: data[14].to_f,
     )
   end
 
